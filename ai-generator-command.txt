@@ -1,0 +1,52 @@
+Create a full Python application with the following features:
+
+### 1. Flask Backend Server (API):
+- **Port:** 5000
+- **Storage:** In-memory (Python list/global variable) for student data.
+- **Endpoints:**
+  - `POST /students`: Accepts JSON payload for new student data and stores it.
+  - `GET /students`: Returns all stored students as a JSON array.
+- **Student Data Structure:** Each student object should have:
+  - `Name` (string)
+  - `Class` (string, e.g., "1st", "2nd", ..., "12th")
+  - `Gender` (string: "Male", "Female", "Other")
+  - `Optional Subjects` (array of strings, e.g., "Sample 1", "Sample 2", "Sample 3")
+  - `Previous Score` (integer, 0-100)
+
+### 2. Streamlit Frontend Application:
+- **Execution:** Runs as a separate script.
+- **Navigation:** Uses Streamlit's multi-page app feature for a professional left-hand sidebar menu.
+- **Sidebar Header:** The sidebar should have a header "Student Management" at the very top.
+- **Pages:**
+  - **"Dashboard" (Main Page):**
+    - Calls `GET /students` from the Flask server.
+    - Displays a pie chart of the number of students per class (using Plotly).
+    - Displays a bar chart of the average score per class (using Plotly).
+  - **"All Students" Page:**
+    - Calls `GET /students` from the Flask server.
+    - Displays all stored students in a table.
+    - Includes a button "➕ Add New Student" that navigates to the "Add Student" page.
+  - **"Add Student" Page:**
+    - Provides a form with inputs for:
+      - Name (text input)
+      - Class (dropdown: 1st to 12th)
+      - Gender (radio buttons: Male/Female/Other)
+      - Optional Subjects (multi-select checkboxes: Sample 1, Sample 2, Sample 3)
+      - Score in Last Class (number input: 0-100)
+    - On form submission:
+      - Sends the student data to `POST /students` as JSON.
+      - Displays a success message and the submitted data as JSON.
+      - Automatically navigates back to the "All Students" page after successful submission.
+- **API Communication:** Uses the `requests` library to interact with the Flask API.
+
+### 3. Project Structure and Setup:
+- **Dependencies:** List all necessary Python packages in `requirements.txt`.
+- **Virtual Environment:** Include instructions for setting up and activating a Python virtual environment.
+- **Running Instructions:** Provide clear instructions for starting both the Flask backend and Streamlit frontend.
+
+### 4. Docker Deployment:
+- **Dockerfile:** Create a `Dockerfile` to build a single Docker image containing both the Flask backend and Streamlit frontend.
+- **Start Script:** Include a `start.sh` script to run both the Flask and Streamlit applications within the Docker container.
+- **Docker Instructions:** Add instructions to `README.md` for building and running the Docker image.
+
+**Constraint:** Do not use any external database; all data must be stored in memory on the Flask backend.
